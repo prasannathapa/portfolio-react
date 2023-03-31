@@ -1,4 +1,4 @@
-const API_ENDPOINT = "http://ec2-3-108-238-193.ap-south-1.compute.amazonaws.com:4000";
+const API_ENDPOINT = "http://15.206.239.48:4000";
 const TOKEN_API = "/api/v1/Token";
 const ANALYTICS_API = "/api/v1/Analytics";
 const DATA_API = "/api/v1/Data";
