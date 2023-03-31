@@ -1,0 +1,17 @@
+.cardSubtitle {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: flex;
+
+    p {
+        margin: auto;
+    }
+
+    span {
+        //font-family: monospace;
+        font-weight: 500;
+        color: darkgray;
+        margin: auto 0 auto auto;
+    }
+}
