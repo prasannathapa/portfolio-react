@@ -59,7 +59,6 @@ function Portfolio() {
       } else if (data.experience) {
         setExperience(data.experience);
       } else if (data.contact) {
-        console.log("MEHBOOBA" + JSON.stringify(data.contact));
         setContacts(data.contact);
       }
     }
@@ -107,8 +106,8 @@ function Portfolio() {
       <div className={styles.body}>
         <div className={styles.card + ' ' + headerState} data-state={'#' + sections[selected].id}>
           <div className={styles.cardHeader}>
-            <div className={styles.cardCover} style={{ backgroundImage: "url('http://prasannathapa.in/me.png')" }}></div>
-            <img className={styles.cardAvatar} src="http://prasannathapa.in/me.png" alt="avatar" />
+            <div className={styles.cardCover} style={{ backgroundImage: "url('"+about?.link+"')" }}></div>
+            <img className={styles.cardAvatar} src={about?.link} alt="avatar" />
             <h1 className={styles.cardFullname}>{t(about?.title, language) || t(language, "text.title_placeholder")}</h1>
             <h2 className={styles.cardJobtitle}>{t(about?.subtitle, language) || t(language, "text.subtitle_placeholder")}</h2>
             <div className={styles.nightToggle}>
