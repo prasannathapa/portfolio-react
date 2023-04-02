@@ -3,7 +3,7 @@ import styles from './settings-modal.module.scss';
 import { languages, themes, t} from '../../utils/db';
 
 const SettingsModal = (props) => {
-  const [themeSelected, setThemeSelected] = useState(localStorage.getItem('theme') || 'light');
+  const [themeSelected, setThemeSelected] = useState(localStorage.getItem('theme') || themes[0]);
   const [langSelected, setLangSelected] = useState(localStorage.getItem('selectedLang') || languages[0]);
 
   const changeTheme = (event) => {

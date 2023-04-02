@@ -409,7 +409,7 @@ select::-ms-expand {
     font-family: "Jost", sans-serif;
     position: relative;
     display: flex;
-    width: 260px;
+    max-width: 260px;
     height: 3em;
     margin: 1px auto;
     border-radius: 4px;

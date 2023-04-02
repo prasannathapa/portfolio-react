@@ -1,4 +1,4 @@
-const API_ENDPOINT = "https://prasannathapa.in";
+const API_ENDPOINT = "http://localhost:4000";
 const TOKEN_API = "/api/v1/Token";
 const ANALYTICS_API = "/api/v1/Analytics";
 const DATA_API = "/api/v1/Data";
@@ -23,7 +23,7 @@ export function getData(type, callback) {
         .catch(error => callback(null, error));
 }
 export function putToken(callback) {
-    fetch(TOKEN_API, {
+    fetch(API_ENDPOINT +TOKEN_API, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ uuid: localStorage.getItem('uuid'), name: localStorage.getItem('name') })

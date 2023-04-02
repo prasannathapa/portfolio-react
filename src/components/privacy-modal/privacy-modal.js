@@ -23,9 +23,10 @@ const PrivacyModal = (props) => {
     putToken((data, err) => {
       if (err) {
         setSubmitButtonState(styles.none);
-        props.dataCallback(false, "Something went wrong");
+        props.dataCallback(false, t(lang,'text.error'));
       } else {
         setSubmitButtonState(styles.finished);
+        props.dataCallback(false, t(lang,"privacy.submitted"));
         if (data.result === 'success') {
           props.dataCallback(true, "success");
         } else if (data.result === 'submitted') {

@@ -1,0 +1,6 @@
+img {
+    display: flex;
+    justify-content: space-evenly;
+    font-family: cursive;
+    align-items: center;
+}

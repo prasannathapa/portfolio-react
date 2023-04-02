@@ -17,13 +17,16 @@
     "settings.language":"Language",
     "settings.unmask_data":"See sensitive info",
     "settings.privacy_notice":"Privacy Notice",
-    "settings.privacy_about":"My personal & sensitive infomation is hidden for obvious reasons, If you know me or if you have some busniess with me, kindly provide your personal/org name.",
-    "settings.privacy_footer":"*Approved devices can view all data, while new mails either gets rejected/approved by me",
+    "settings.privacy_about":"My personal & sensitive infomation is hidden for obvious reasons, If you know me or if you have some busniess with me, kindly provide your personal/org name or reason",
+    "settings.privacy_footer":"*Approved browsers can view all data, while new requests either gets rejected/approved by me",
     "text.name":"Name",
     "text.skip":"Skip",
     "text.submit":"Submit",
     "text.title_placeholder":"Hi There!",
     "text.subtitle_placeholder":"please wait",
     "text.download_resume":"Download PDF",
-    "text.blogs":"Blog posts & Articles"
+    "text.blogs":"Blog posts & Articles",
+    "text.error":"Something went wrong",
+    "privacy.submitted":"Request Submitted, refresh once after I manually aprove your request or reach out via socal media",
+    "privacy.not_allowed":"This requires approval from me, please fill the form"
 }

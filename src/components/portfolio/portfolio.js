@@ -31,18 +31,22 @@ function Portfolio() {
   const changeTheme = (theme) => {
     if (!theme) {
       theme = localStorage.getItem('theme');
-    } if (theme === 'auto') {
+    } if (theme === 'auto' || theme === null) {
       theme = window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ? 'dark' : 'light';
     }
     // eslint-disable-next-line default-case
     switch (theme) {
       case "dark":
         setTheme(styles.darkTheme);
+        document.querySelector("meta[name='theme-color']").content = "#000";
         break;
       default:
         setTheme(undefined);
+        document.querySelector("meta[name='theme-color']").content = "#fff";
         break;
     }
+    document.title = t(about?.title, language) || 'Portfolio';
+    document.querySelector('meta[name="description"]').content = t(about?.about, language) || 'Read about me!';
   }
   const navigate = useNavigate();
 
@@ -70,7 +74,7 @@ function Portfolio() {
     setShowModal({ ...showModal, privacyModal: !close });
     if (msg) {
       setToastMsg(msg);
-      setTimeout(() => { setToastMsg(null) }, 3000);
+      setTimeout(() => { setToastMsg(null) }, 8000);
     }
   };
   const dataCallbackSettings = (close, msg, data) => {
@@ -91,7 +95,19 @@ function Portfolio() {
   const openSettings = () => {
     setShowModal({ privacyModal: false, settingsModal: true });
   }
-
+  const downloadResume = () => {
+    if (about?.pdf.link) {
+      const link = document.createElement('a');
+      link.href = about?.pdf.link;
+      link.setAttribute('download', 'Prasanna\'s resume for ' + localStorage.getItem('name') + '.pdf');
+      document.body.appendChild(link);
+      link.click();
+    } else {
+      setToastMsg(t(language, 'privacy.not_allowed'));
+      openPrivacyModal();
+      setTimeout(() => { setToastMsg(null) }, 8000);
+    }
+  }
   const buttonClick = (index) => {
     setSection(initial_sections.map((sec, i) =>
       i === index
@@ -106,7 +122,7 @@ function Portfolio() {
       <div className={styles.body}>
         <div className={styles.card + ' ' + headerState} data-state={'#' + sections[selected].id}>
           <div className={styles.cardHeader}>
-            <div className={styles.cardCover} style={{ backgroundImage: "url('"+about?.link+"')" }}></div>
+            <div className={styles.cardCover} style={{ backgroundImage: "url('" + about?.link + "')" }}></div>
             <img className={styles.cardAvatar} src={about?.link} alt="avatar" />
             <h1 className={styles.cardFullname}>{t(about?.title, language) || t(language, "text.title_placeholder")}</h1>
             <h2 className={styles.cardJobtitle}>{t(about?.subtitle, language) || t(language, "text.subtitle_placeholder")}</h2>
@@ -129,7 +145,7 @@ function Portfolio() {
               <div className={styles.cardContent}>
                 <div className={modalCss.flex}>
                   <div className={styles.cardContactWrapper}>
-                    {
+                    {contact &&
                       Object.values(contact).map((item, i) =>
                         <div className={styles.cardContact} key={i}>
                           <SocialIcons key={i} viewBox={item.icon.viewBox} paths={item.icon.paths} link={item.link}></SocialIcons>
@@ -140,7 +156,7 @@ function Portfolio() {
                   </div>
                 </div>
                 <div className={styles.cardContactWrapper}>
-                  <button className={styles.submit}>{t(language, "text.download_resume")}</button>
+                  <button onClick={downloadResume} className={styles.submit}>{t(language, "text.download_resume")}</button>
                 </div>
 
               </div>
