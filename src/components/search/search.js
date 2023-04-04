@@ -47,10 +47,10 @@ const Search = (props) => {
           </svg>
         </div>
         <div className={[styles.tagsWrapper, isExpanded?styles.maxHeight40:styles.maxHeightAuto].join(" ")}>
-          {props.tags.map((item, i) =>
+          {props.tags && props.tags.map((item, i) =>
             <div onClick={() => tagClick(i)} className={[styles.tags, selectedTags[i] ? styles.active : null].join(' ')} key={i}>
-              <img width={24} height={24} src={item.icon} alt={t(item.text, lang)} />
-              <span>{t(item.text, lang)}</span>
+              <img width={24} height={24} src={item.src} alt={item.title} />
+              <span>{item.title}</span>
             </div>
           )}
         </div>

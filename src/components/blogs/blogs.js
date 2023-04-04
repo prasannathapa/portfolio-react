@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './blogs.module.scss';
 import Search from '../search/search';
 import { useNavigate } from "react-router-dom";
-import { tags } from '../../utils/db';
+import { globalInitialiserCallbacks } from '../../utils/initializeSetup';
 
 const searchTextUpdate = (text, tags) => {
   console.log(text, tags);
@@ -18,6 +18,8 @@ function getTheme() {
 const Blogs = () => {
   const navigate = useNavigate();
   let [theme, setTheme] = useState(getTheme());
+  let [blogs, setBlogs] = useState(JSON.parse(localStorage.getItem('blogs')||null));
+  let [tags, setTags] =  useState(JSON.parse(localStorage.getItem('tags')||null));
 
   const changeTheme = () => {
     if (theme === 'light') {
@@ -41,23 +43,44 @@ const Blogs = () => {
       default:
     }
   }
+  useEffect(() => {
+    globalInitialiserCallbacks.BlogsCallBack = (data) => {
+      if (data.blogs) {
+        setBlogs(data.blogs);
+      }
+      if (data.tags) {
+        setTags(data.tags);
+      }
+    }
+  });
   return (
     <div className={[styles.Blogs, styles[theme]].join(" ")}>
       <Search onTextUpdate={searchTextUpdate} tags={tags} buttonClick={buttonClick} theme={theme} />
       <div className={styles.content}>
         <div className={styles.blogWrapper}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) => <div className={styles.verticalItem}>
-            <div className={styles.item}>
-              <img src="https://makaut-student.web.app/static/media/result-prev.fcf063a6.png" />
-              <div>
-                <h3>MAKAUT API</h3>
-                <p>This is an analytics tool for your semester results as well as a rating card for your profile</p>
+          {blogs && blogs.map((item, i) =>
+            <div className={styles.verticalItem} key={i}>
+              <div className={styles.item}>
+                <img src={item.image} alt={item.title} />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.content}</p>
+                </div>
+              </div>
+              <div style={{ display: 'flex', margin: '0 auto' }}>
+                {item.blog && item.blog.length > 0 &&
+                  <button onClick={() => window.open(item.blog.length, "_blank")}>
+                    Read Blog
+                  </button>
+                }
+
+                {item.download && item.download.length > 0 &&
+                  <button onClick={() => window.open(item.download.length, "_blank")}>
+                    Checkout App
+                  </button>
+                }
               </div>
             </div>
-            <button>
-              Read More
-            </button>
-          </div>
           )}
         </div>
       </div>

@@ -1,4 +1,4 @@
-const API_ENDPOINT = "";
+const API_ENDPOINT = "http://localhost:4000";
 const TOKEN_API = "/api/v1/Token";
 const ANALYTICS_API = "/api/v1/Analytics";
 const DATA_API = "/api/v1/Data";

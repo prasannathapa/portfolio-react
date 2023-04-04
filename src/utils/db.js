@@ -84,7 +84,7 @@ let tags = [
     },
     {
         text: { English: "NodeJS" },
-        icon: "/tag-icons/nodeJS.png"
+        icon: "/tag-icons/nodejs.png"
     },
     {
         text: { English: "Economics" },
