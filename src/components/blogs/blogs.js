@@ -69,13 +69,13 @@ const Blogs = () => {
               </div>
               <div style={{ display: 'flex', margin: '0 auto' }}>
                 {item.blog && item.blog.length > 0 &&
-                  <button onClick={() => window.open(item.blog.length, "_blank")}>
+                  <button onClick={() => window.open(item.blog, "_blank")}>
                     Read Blog
                   </button>
                 }
 
                 {item.download && item.download.length > 0 &&
-                  <button onClick={() => window.open(item.download.length, "_blank")}>
+                  <button onClick={() => window.open(item.download, "_blank")}>
                     Checkout App
                   </button>
                 }

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './search.module.scss';
-import { languages, t } from '../../utils/db';
 
 
 const Search = (props) => {
@@ -9,7 +8,6 @@ const Search = (props) => {
   let [selectedTags, setSelectedTags] = useState({});
   let [text, setText] = useState("");
   let [isExpanded, setExpanded] = useState(true);
-  let lang = localStorage.getItem('selectedLang') || languages[0];
 
   const onTextUpdate = (e) => {
     let text = e.target.value;
