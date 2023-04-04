@@ -26,11 +26,11 @@ body {
 
 #snackbar.show {
   visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 7.5s;
+  -webkit-animation: fadeinSnackbar 0.5s, fadeoutSnackbar 0.5s 2.5s;
+  animation: fadeinSnackbar 0.5s, fadeoutSnackbar 0.5s 7.5s;
 }
 
-@-webkit-keyframes fadein {
+@keyframes fadeinSnackbar {
   from {
     bottom: 0;
     opacity: 0;
@@ -42,19 +42,7 @@ body {
   }
 }
 
-@keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeout {
+@keyframes fadeoutSnackbar {
   from {
     bottom: 30px;
     opacity: 1;
@@ -66,14 +54,5 @@ body {
   }
 }
 
-@keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
 
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
-}
+

@@ -33,7 +33,7 @@ const loadingSvg = <div className={styles.loading} title="Loading"><svg version=
 </div>
 const socialIconsList = [
 ]
-const languages = ["English","Hindi"];
+const languages = ["English", "Hindi"];
 const themes = ["auto", "light", "dark"];
 const t = (lang, msg) => {
     if (typeof lang === 'string') {
@@ -59,71 +59,42 @@ const t = (lang, msg) => {
         return null;
     }
 }
-export { languages, socialIconsList, themes, t, loadingSvg };
+
+
+let tags = [
+    {
+        text: { English: "Angular" },
+        icon: "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg"
+    },
+    {
+        text: { English: "React" },
+        icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+    },
+    {
+        text: { English: "Java" },
+        icon: "/tag-icons/java.svg"
+    },
+    {
+        text: { English: "Android" },
+        icon: "/tag-icons/android.svg"
+    },
+    {
+        text: { English: "C++" },
+        icon: "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg"
+    },
+    {
+        text: { English: "NodeJS" },
+        icon: "/tag-icons/nodeJS.png"
+    },
+    {
+        text: { English: "Economics" },
+        icon: "/tag-icons/economics.png"
+    },
+    {
+        text: { English: "Adventure" },
+        icon: "/tag-icons/economics.png"
+    },
+]
+
+export { languages, socialIconsList, themes, t, loadingSvg, tags };
 export default socialIconsList;
-
-let x = {
-    "experiance": [
-        {
-            "heading": {
-                "data": [
-                    {
-                        "i18n": "English",
-                        "text": "Zoho Corp",
-                        "access": 0
-                    }
-                ]
-            },
-            "link": "https://upload.wikimedia.org/wikipedia/commons/f/f2/ZOHO.svg",
-            "title": {
-                "data": [
-                    {
-                        "i18n": "English",
-                        "text": "Software Development Engineer",
-                        "access": 0
-                    },
-                    {
-                        "i18n": "English",
-                        "text": "Member Technical Staff",
-                        "access": 1
-                    },
-                    {
-                        "i18n": "Hindi",
-                        "text": "तंत्रांश अभियान्ता",
-                        "access": 0
-                    },
-                    {
-                        "i18n": "Hinglish",
-                        "text": "तंत्रांश अभियान्ता",
-                        "access": 0
-                    },
-                    {
-                        "i18n": "Tamil",
-                        "text": "மென்பொருள் உருவாக்குபவர்",
-                        "access": 0
-                    },
-                ]
-            },
-            "image": "https://upload.wikimedia.org/wikipedia/commons/f/f2/ZOHO.svg",
-            "timestamp": {
-                "$numberLong": "1680029386"
-            },
-            "timeline": [
-                {
-                    "year": 2022,
-                    "title": [
-                        {
-                            "i18n": "English",
-                            "access": 0,
-                            "text": "sample"
-                        }
-                    ],
-                    "description": {
-
-                    }
-                }
-            ]
-        }
-    ],
-    "type": "experiance"
-}

@@ -35,7 +35,7 @@ const TimelineItem = (props) => (
     </div>
     <div className={styles.cardTimeline}>
       {props.data.timeline.map((item, i) =>
-        <div className={styles.cardItem} data-year={item.year}>
+        <div key={i} className={styles.cardItem} data-year={item.year}>
           <div className={styles.cardItemTitle}>{t(item.title, props.language)}</div>
           <div className={styles.cardItemDesc}>
             {

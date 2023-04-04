@@ -186,10 +186,10 @@ function Portfolio() {
                 </div>
               </div>
             </div>
-            <div className={styles.cardSection + ' ' + sections[1].className} id={sections[1].id}>
+            <div className={[styles.cardSection, sections[1].className].join(' ')} id={sections[1].id}>
               <div className={styles.cardContent}>
                 {
-                  experience && experience.map((exp, i) => <TimelineItem language={language} data={exp} key={i} />)
+                  experience && experience.map((exp, i) => <TimelineItem language={language} data={exp} key={i}/>)
                 }
               </div>
             </div>
