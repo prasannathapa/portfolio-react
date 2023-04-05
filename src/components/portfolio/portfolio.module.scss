@@ -118,6 +118,9 @@ $wheatDark: black;
                 height: calc(100% - 15px);
             }
         }
+        img{
+            filter:brightness(0.7);
+        }
     }
 }
 
@@ -639,6 +642,12 @@ $wheatDark: black;
             width: calc(100% - 9px);
             height: calc(100% - 15px);
         }
+    }
+    img {
+        max-width: 540px;
+        width: 60vw;
+        border-radius: 12px;
+        margin-top: 12px;
     }
 }
 

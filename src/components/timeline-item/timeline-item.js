@@ -42,9 +42,7 @@ const TimelineItem = (props) => (
               convertStringToLink(t(item.description, props.language)).map(elem => elem)
             }
             {item.image &&
-              <a href={item.image.link} target="_blank" rel="noreferrer">
-                <img src={item.image.src} alt={item.title} />
-              </a>
+              <img onClick={() => { window.open(item.image.link, "_blank") }} src={item.image.src} alt={item.image.title} />
             }
           </div>
         </div>
