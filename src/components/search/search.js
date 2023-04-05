@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './search.module.scss';
 
 
@@ -12,7 +12,7 @@ const Search = (props) => {
   const onTextUpdate = (e) => {
     let text = e.target.value;
     setText(text);
-    props.onTextUpdate(text, selectedTags);
+    props.onTextUpdate(text, Object.keys(selectedTags).filter(key => selectedTags[key]));
     setSearchState(text.length > 0)
   }
   const onClick = (e) => {
@@ -22,11 +22,12 @@ const Search = (props) => {
     setExpanded(!isExpanded);
   }
   const tagClick = (i) => {
-    setSelectedTags({
+    let update = {
       ...selectedTags,
       [i]: !selectedTags[i]
-    })
-    props.onTextUpdate(text, selectedTags);
+    };
+    setSelectedTags(update)
+    props.onTextUpdate(text, Object.keys(update).filter(key => update[key]))
   }
   let icon = <img onClick={onClick} data="search" src='/util-icons/search.svg' alt='search' />;
   if (!searchState) {
@@ -44,16 +45,16 @@ const Search = (props) => {
             <path onClick={onClick} data="changeTheme" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
           </svg>
         </div>
-        <div className={[styles.tagsWrapper, isExpanded?styles.maxHeight40:styles.maxHeightAuto].join(" ")}>
+        <div className={[styles.tagsWrapper, isExpanded ? styles.maxHeight40 : styles.maxHeightAuto].join(" ")}>
           {props.tags && props.tags.map((item, i) =>
-            <div onClick={() => tagClick(i)} className={[styles.tags, selectedTags[i] ? styles.active : null].join(' ')} key={i}>
+            <div onClick={() => tagClick(item.title)} className={[styles.tags, selectedTags[item.title] ? styles.active : null].join(' ')} key={i}>
               <img width={24} height={24} src={item.src} alt={item.title} />
               <span>{item.title}</span>
             </div>
           )}
         </div>
-        <div style={{display:'grid'}} onClick={expand}>
-          <svg className={[styles.expand, isExpanded?styles.rotate:styles.straight].join(' ')} xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="48"><path d="m283 711-43-43 240-240 240 239-43 43-197-197-197 198Z" /></svg>
+        <div style={{ display: 'grid' }} onClick={expand}>
+          <svg className={[styles.expand, isExpanded ? styles.rotate : styles.straight].join(' ')} xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="48"><path d="m283 711-43-43 240-240 240 239-43 43-197-197-197 198Z" /></svg>
         </div>
       </div>
     </div>
