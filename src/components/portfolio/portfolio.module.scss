@@ -23,7 +23,6 @@ $wheatDark: black;
 .darkTheme {
     .card {
         background-color: $backgroundColorDark;
-        box-shadow: 0 0 0 8px $boxShadowDark;
     }
 
     .card {
@@ -60,7 +59,7 @@ $wheatDark: black;
 
     .body {
         color: $textColor;
-        background-color: $textColorDark;
+        background-color: #1d1d1d;
 
         a {
 
@@ -73,6 +72,10 @@ $wheatDark: black;
         button.submit {
             background-color: $wheat;
             color: $textColor;
+        }
+        path,
+        circle {
+            fill: $textColorDark;
         }
     }
 
@@ -129,18 +132,19 @@ $wheatDark: black;
     font-family: "Jost", sans-serif;
     background-repeat: repeat;
     background-size: cover;
-    background: $textColor;
+    background: black;
     background-position: center;
     background-attachment: fixed;
-    min-height: 100vh;
+    height: 100vh;
     //display: flex;
     flex-wrap: wrap;
     padding: 4px;
+    margin: auto;
     transition: all 1s;
 
     path,
     circle {
-        fill: $textColorDark;
+        fill: black;
     }
 
     a {
@@ -173,7 +177,7 @@ $wheatDark: black;
 
 .card {
     //max-width: 740px;
-    height: 99vh;
+    max-height: 100%;
     overflow-y: auto;
     position: relative;
     z-index: 1;
@@ -424,6 +428,7 @@ $wheatDark: black;
 .map {
     max-width: 300px;
     border-radius:20px;
+    animation: leftEnter 0.5s ease-out;
 }
 .cardContent {
     padding: 20px;
