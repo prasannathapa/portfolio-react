@@ -175,7 +175,7 @@ function Portfolio() {
               <div className={styles.cardContent}>
                 <div className={modalCss.flexWrapEvenly}>
                   <div className={styles.cardContactWrapper}>
-                      <iframe title='Location' className={styles.map} src="https://www.google.com/maps/embed/v1/place?q=Zoho+Corp+Estancia&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                      <iframe title='Location' className={styles.map} src="https://www.google.com/maps/embed/v1/place?q=TamilNadu&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
                   </div>
                   <div className={styles.cardContactWrapper}>
                     {contact &&

@@ -426,6 +426,8 @@ $wheatDark: black;
     }
 }
 .map {
+    filter: grayscale(1) invert(1);
+    border: none;
     max-width: 300px;
     border-radius:20px;
     animation: leftEnter 0.5s ease-out;
