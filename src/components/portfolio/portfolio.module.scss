@@ -60,7 +60,7 @@ $wheatDark: black;
 
     .body {
         color: $textColor;
-        background-color: #1d1d1d;
+        background-color: $textColorDark;
 
         a {
 
@@ -129,13 +129,13 @@ $wheatDark: black;
     font-family: "Jost", sans-serif;
     background-repeat: repeat;
     background-size: cover;
-    background: rgb(255, 249, 249);
+    background: $textColor;
     background-position: center;
     background-attachment: fixed;
     min-height: 100vh;
     //display: flex;
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 4px;
     transition: all 1s;
 
     path,
@@ -173,7 +173,7 @@ $wheatDark: black;
 
 .card {
     //max-width: 740px;
-    height: 96.5vh;
+    height: 99vh;
     overflow-y: auto;
     position: relative;
     z-index: 1;
@@ -182,8 +182,7 @@ $wheatDark: black;
     display: flex;
     transition: 0.3s;
     flex-direction: column;
-    //border-radius: 10px;
-    box-shadow: 0 0 0 8px $boxShadow;
+    border-radius: 10px;
     max-width: 690px;
     margin: auto;
 }
