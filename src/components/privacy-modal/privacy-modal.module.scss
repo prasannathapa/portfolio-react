@@ -204,6 +204,12 @@ $base-duration: 500ms;
     display: flex;
 }
 
+.flexWrapEvenly{
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap-reverse;
+} 
+
 .hide {
     display: none;
 }

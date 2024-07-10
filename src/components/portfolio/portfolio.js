@@ -17,7 +17,7 @@ function Portfolio() {
   let initial_sections = [
     { id: "about", button: "tab.about", className: styles.isActive, expandedTop: styles.isInitial },
     { id: "experience", button: "tab.experiance", expandedTop: styles.isActive },
-    { id: "contact", button: "tab.contact", expandedTop: styles.isPassive }];
+    { id: "contact", button: "tab.contact", expandedTop: styles.isActive }];
   const [sections, setSection] = useState(initial_sections);
   const [selected, setSelected] = useState(0);
   const [headerState, setHeaderState] = useState(initial_sections[0].expandedTop);
@@ -140,28 +140,6 @@ function Portfolio() {
                 <SocialIcons key={i} viewBox={item.viewBox} paths={item.paths} link={item.link}></SocialIcons>
               )}
           </div>
-          <div>
-            <div className={styles.cardSection + ' ' + sections[2].className} id={sections[2].id}>
-              <div className={styles.cardContent}>
-                <div className={modalCss.flex}>
-                  <div className={styles.cardContactWrapper}>
-                    {contact &&
-                      Object.values(contact).map((item, i) =>
-                        <div className={styles.cardContact} key={i}>
-                          <SocialIcons key={i} viewBox={item.icon.viewBox} paths={item.icon.paths} link={item.link}></SocialIcons>
-                          <a href={item.link} target="_blank" rel="noreferrer">{t(item.text, language)}</a>
-                        </div>
-                      )
-                    }
-                  </div>
-                </div>
-                <div className={styles.cardContactWrapper}>
-                  <button onClick={downloadResume} className={styles.submit}>{t(language, "text.download_resume")}</button>
-                </div>
-
-              </div>
-            </div>
-          </div>
           <div className={styles.cardButtons}>
             {sections.map((sec, i) =>
               <button
@@ -189,8 +167,38 @@ function Portfolio() {
             <div className={[styles.cardSection, sections[1].className].join(' ')} id={sections[1].id}>
               <div className={styles.cardContent}>
                 {
-                  experience && experience.map((exp, i) => <TimelineItem language={language} data={exp} key={i}/>)
+                  experience && experience.map((exp, i) => <TimelineItem language={language} data={exp} key={i} />)
                 }
+              </div>
+            </div>
+            <div className={styles.cardSection + ' ' + sections[2].className} id={sections[2].id}>
+              <div className={styles.cardContent}>
+                <div className={modalCss.flexWrapEvenly}>
+                  <div className={styles.cardContactWrapper}>
+                      <iframe title='Location' className={styles.map} src="https://www.google.com/maps/embed/v1/place?q=Zoho+Corp+Estancia&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                  </div>
+                  <div className={styles.cardContactWrapper}>
+                    {contact &&
+                      Object.values(contact).map((item, i) =>
+                        <div className={styles.cardContact} key={i}>
+                          <SocialIcons key={i} viewBox={item.icon.viewBox} paths={item.icon.paths} link={item.link}></SocialIcons>
+                          <a href={item.link} target="_blank" rel="noreferrer">{t(item.text, language)}</a>
+                        </div>
+                      )
+                    }
+                  </div>
+                </div>
+                <div className={styles.cardContactWrapper}>
+                  <button onClick={downloadResume} className={styles.submit}>{t(language, "text.download_resume")}</button>
+                </div>
+                <div className={styles.cardContactWrapper}>
+                  <div className={styles.contcatSocial}>
+                    {icons &&
+                      icons.map((item, i) =>
+                        <SocialIcons key={i} viewBox={item.viewBox} paths={item.paths} link={item.link}></SocialIcons>
+                      )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
