@@ -45,6 +45,14 @@ getData('contact', (resp, err) => {
         makeCallbacks({ 'contact': resp.response });
     }
 })
+getData('blogs', (resp, err) => {
+    if (!err) {
+        localStorage.setItem('blogs', JSON.stringify(resp.response.blogs));
+        localStorage.setItem('tags', JSON.stringify(resp.response.tags));
+        makeCallbacks({ 'blogs': resp.response.blogs });
+        makeCallbacks({ 'tags': resp.response.tags });
+    }
+})
 function makeCallbacks(data) {
     for (let callbacks in globalInitialiserCallbacks) {
         globalInitialiserCallbacks[callbacks](data);

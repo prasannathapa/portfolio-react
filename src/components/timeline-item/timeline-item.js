@@ -35,16 +35,14 @@ const TimelineItem = (props) => (
     </div>
     <div className={styles.cardTimeline}>
       {props.data.timeline.map((item, i) =>
-        <div className={styles.cardItem} data-year={item.year}>
+        <div key={i} className={styles.cardItem} data-year={item.year}>
           <div className={styles.cardItemTitle}>{t(item.title, props.language)}</div>
           <div className={styles.cardItemDesc}>
             {
               convertStringToLink(t(item.description, props.language)).map(elem => elem)
             }
             {item.image &&
-              <a href={item.image.link} target="_blank" rel="noreferrer">
-                <img src={item.image.src} alt={item.title} />
-              </a>
+              <img onClick={() => { window.open(item.image.link, "_blank") }} src={item.image.src} alt={item.image.title} />
             }
           </div>
         </div>

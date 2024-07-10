@@ -17,7 +17,7 @@ function Portfolio() {
   let initial_sections = [
     { id: "about", button: "tab.about", className: styles.isActive, expandedTop: styles.isInitial },
     { id: "experience", button: "tab.experiance", expandedTop: styles.isActive },
-    { id: "contact", button: "tab.contact", expandedTop: styles.isPassive }];
+    { id: "contact", button: "tab.contact", expandedTop: styles.isActive }];
   const [sections, setSection] = useState(initial_sections);
   const [selected, setSelected] = useState(0);
   const [headerState, setHeaderState] = useState(initial_sections[0].expandedTop);
@@ -31,18 +31,22 @@ function Portfolio() {
   const changeTheme = (theme) => {
     if (!theme) {
       theme = localStorage.getItem('theme');
-    } if (theme === 'auto') {
+    } if (theme === 'auto' || theme === null) {
       theme = window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ? 'dark' : 'light';
     }
     // eslint-disable-next-line default-case
     switch (theme) {
       case "dark":
         setTheme(styles.darkTheme);
+        document.querySelector("meta[name='theme-color']").content = "#000";
         break;
       default:
         setTheme(undefined);
+        document.querySelector("meta[name='theme-color']").content = "#fff";
         break;
     }
+    document.title = t(about?.title, language) || 'Portfolio';
+    document.querySelector('meta[name="description"]').content = t(about?.about, language) || 'Read about me!';
   }
   const navigate = useNavigate();
 
@@ -59,7 +63,6 @@ function Portfolio() {
       } else if (data.experience) {
         setExperience(data.experience);
       } else if (data.contact) {
-        console.log("MEHBOOBA" + JSON.stringify(data.contact));
         setContacts(data.contact);
       }
     }
@@ -71,7 +74,7 @@ function Portfolio() {
     setShowModal({ ...showModal, privacyModal: !close });
     if (msg) {
       setToastMsg(msg);
-      setTimeout(() => { setToastMsg(null) }, 3000);
+      setTimeout(() => { setToastMsg(null) }, 8000);
     }
   };
   const dataCallbackSettings = (close, msg, data) => {
@@ -92,7 +95,19 @@ function Portfolio() {
   const openSettings = () => {
     setShowModal({ privacyModal: false, settingsModal: true });
   }
-
+  const downloadResume = () => {
+    if (about?.pdf.link) {
+      const link = document.createElement('a');
+      link.href = about?.pdf.link;
+      link.setAttribute('download', 'Prasanna\'s resume for ' + localStorage.getItem('name') + '.pdf');
+      document.body.appendChild(link);
+      link.click();
+    } else {
+      setToastMsg(t(language, 'privacy.not_allowed'));
+      openPrivacyModal();
+      setTimeout(() => { setToastMsg(null) }, 8000);
+    }
+  }
   const buttonClick = (index) => {
     setSection(initial_sections.map((sec, i) =>
       i === index
@@ -107,8 +122,8 @@ function Portfolio() {
       <div className={styles.body}>
         <div className={styles.card + ' ' + headerState} data-state={'#' + sections[selected].id}>
           <div className={styles.cardHeader}>
-            <div className={styles.cardCover} style={{ backgroundImage: "url('http://prasannathapa.in/me.png')" }}></div>
-            <img className={styles.cardAvatar} src="http://prasannathapa.in/me.png" alt="avatar" />
+            <div className={styles.cardCover} style={{ backgroundImage: "url('" + about?.link + "')" }}></div>
+            <img className={styles.cardAvatar} src={about?.link} alt="avatar" />
             <h1 className={styles.cardFullname}>{t(about?.title, language) || t(language, "text.title_placeholder")}</h1>
             <h2 className={styles.cardJobtitle}>{t(about?.subtitle, language) || t(language, "text.subtitle_placeholder")}</h2>
             <div className={styles.nightToggle}>
@@ -124,28 +139,6 @@ function Portfolio() {
               icons.map((item, i) =>
                 <SocialIcons key={i} viewBox={item.viewBox} paths={item.paths} link={item.link}></SocialIcons>
               )}
-          </div>
-          <div>
-            <div className={styles.cardSection + ' ' + sections[2].className} id={sections[2].id}>
-              <div className={styles.cardContent}>
-                <div className={modalCss.flex}>
-                  <div className={styles.cardContactWrapper}>
-                    {
-                      Object.values(contact).map((item, i) =>
-                        <div className={styles.cardContact} key={i}>
-                          <SocialIcons key={i} viewBox={item.icon.viewBox} paths={item.icon.paths} link={item.link}></SocialIcons>
-                          <a href={item.link} target="_blank" rel="noreferrer">{t(item.text, language)}</a>
-                        </div>
-                      )
-                    }
-                  </div>
-                </div>
-                <div className={styles.cardContactWrapper}>
-                  <button className={styles.submit}>{t(language, "text.download_resume")}</button>
-                </div>
-
-              </div>
-            </div>
           </div>
           <div className={styles.cardButtons}>
             {sections.map((sec, i) =>
@@ -171,11 +164,41 @@ function Portfolio() {
                 </div>
               </div>
             </div>
-            <div className={styles.cardSection + ' ' + sections[1].className} id={sections[1].id}>
+            <div className={[styles.cardSection, sections[1].className].join(' ')} id={sections[1].id}>
               <div className={styles.cardContent}>
                 {
                   experience && experience.map((exp, i) => <TimelineItem language={language} data={exp} key={i} />)
                 }
+              </div>
+            </div>
+            <div className={styles.cardSection + ' ' + sections[2].className} id={sections[2].id}>
+              <div className={styles.cardContent}>
+                <div className={modalCss.flexWrapEvenly}>
+                  <div className={styles.cardContactWrapper}>
+                      <iframe title='Location' className={styles.map} src="https://www.google.com/maps/embed/v1/place?q=Zoho+Corp+Estancia&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                  </div>
+                  <div className={styles.cardContactWrapper}>
+                    {contact &&
+                      Object.values(contact).map((item, i) =>
+                        <div className={styles.cardContact} key={i}>
+                          <SocialIcons key={i} viewBox={item.icon.viewBox} paths={item.icon.paths} link={item.link}></SocialIcons>
+                          <a href={item.link} target="_blank" rel="noreferrer">{t(item.text, language)}</a>
+                        </div>
+                      )
+                    }
+                  </div>
+                </div>
+                <div className={styles.cardContactWrapper}>
+                  <button onClick={downloadResume} className={styles.submit}>{t(language, "text.download_resume")}</button>
+                </div>
+                <div className={styles.cardContactWrapper}>
+                  <div className={styles.contcatSocial}>
+                    {icons &&
+                      icons.map((item, i) =>
+                        <SocialIcons key={i} viewBox={item.viewBox} paths={item.paths} link={item.link}></SocialIcons>
+                      )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

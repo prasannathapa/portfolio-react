@@ -1,0 +1,221 @@
+:root {
+    --search-icon-bg: rgb(239, 239, 239);
+    --search-area-bg: rgb(239, 239, 239);
+    --main-color: rgb(42, 42, 42);
+
+}
+
+$dark-purple: rgb(186, 169, 250);
+
+.Search {
+    .dark {
+        background-color: #000;
+
+        .searchwrapper {
+
+            svg {
+                color: $dark-purple;
+                fill: $dark-purple;
+            }
+
+            img {
+                overflow: scroll;
+                background: $dark-purple
+            }
+
+            input {
+                background-color: rgb(26, 23, 33);
+                color: #000;
+                color: whitesmoke;
+            }
+        }
+
+        .tagsWrapper {
+
+            .tags {
+                background: rgb(53, 53, 87);
+                color: whitesmoke
+            }
+        }
+
+        .active {
+            box-shadow: inset 0px 5px 12px -8px rgba(0, 0, 0, 0.75);
+            border: solid aqua 1px !important;
+        }
+
+    }
+
+    @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap");
+    font-family: 'DM';
+
+    .searchwrapper {
+        display: flex;
+        align-content: space-between;
+        margin-left: 12px;
+        margin-right: 12px;
+
+        svg {
+            width: 48px;
+            padding: 12px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 28px;
+            margin: 12px 6px;
+            margin-left: auto;
+            overflow: scroll;
+            color: var(--main-color);
+        }
+
+        img {
+            width: 48px;
+            padding: 12px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 28px;
+            background-color: var(--search-icon-bg);
+            //box-shadow: 0px 5px 12px -8px rgba(0, 0, 0, 0.75);
+            margin: 12px 6px;
+            margin-left: auto;
+            overflow: scroll;
+            color: var(--main-color);
+            animation: fadein 500ms;
+        }
+
+        input {
+            box-shadow: inset 0px 0px 12px -8px rgba(0, 0, 0, 0.75);
+            border: none;
+            flex: 1;
+            outline: none;
+            padding: 0 20px;
+            width: 80vw;
+            min-width: 160px;
+            max-width: 480px;
+            font-size: 16px;
+            background-color: var(--search-area-bg);
+            color: var(--main-color);
+            padding-right: 12px;
+            height: 48px;
+            border-radius: 28px;
+            //box-shadow: 0px 5px 12px -8px rgba(0, 0, 0, 0.75);
+            margin: 12px 6px;
+        }
+
+    }
+
+    .tagsWrapper {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        min-width: 200px;
+        max-width: 550px;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding: 0 12px;
+        transition: 1s all ease;
+        overflow: hidden;
+
+        .tags {
+            flex: 1;
+            display: flex;
+            margin: 4px 6px;
+            align-items: center;
+            background: var(--search-area-bg);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            min-width: 100px;
+            border: solid transparent 1px;
+            animation: fadein 500ms ease;
+            animation-fill-mode: both;
+
+            img {
+                margin-left: auto;
+            }
+
+            span {
+                margin-left: 8px;
+                margin-right: auto;
+            }
+        }
+
+        .expand {
+            fill: $dark-purple;
+            margin: 0 auto;
+        }
+    }
+
+    .active {
+        box-shadow: inset 0px 5px 12px -8px rgba(0, 0, 0, 0.75);
+        border: solid whitesmoke 1px !important;
+    }
+
+}
+
+.expand {
+    fill: lightgray;
+    margin: 0 auto;
+    margin-top: 12px;
+    transition: 1s all ease;
+}
+
+@for $i from 1 through 10 {
+    .tagsWrapper .tags:nth-child(#{$i}n) {
+        animation-delay: #{$i * 0.1}s;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+.maxHeight40 {
+    //height: 40px !important;
+    animation: collapse 500ms ease-out;
+    animation-fill-mode: both;
+}
+
+.maxHeightAuto {
+    //height: 40px !important;
+    animation: expand 500ms ease-in;
+    animation-fill-mode: both;
+}
+
+@keyframes collapse {
+    from {
+        height: 100px;
+    }
+
+    to {
+        height: 40px;
+        /* your line height here */
+    }
+}
+
+@keyframes expand {
+    0% {
+        height: 40px;
+    }
+
+    99% {
+        height: 100px;
+        /* your line height here */
+    }
+
+    100% {
+        height: auto;
+        /* your line height here */
+    }
+}
