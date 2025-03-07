@@ -59,6 +59,7 @@ $wheatDark: black;
 
     .body {
         color: $textColor;
+        align-content: center;
         background-color: #1d1d1d;
 
         a {
@@ -136,7 +137,7 @@ $wheatDark: black;
     background-position: center;
     background-attachment: fixed;
     height: 100vh;
-    //display: flex;
+    align-content: center;
     flex-wrap: wrap;
     padding: 4px;
     margin: auto;
