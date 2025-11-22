@@ -22,7 +22,6 @@ const Blogs = () => {
   let [searchFilter, setSearchFilter] = useState("");
 
   const searchTextUpdate = (text, tags) => {
-    console.log(tags);
     setTagsFilter(tags);
     setSearchFilter(text);
   }
@@ -38,6 +37,7 @@ const Blogs = () => {
       document.querySelector("meta[name='theme-color']").content = "#fff";
     }
   }
+
   const buttonClick = (id) => {
     switch (id) {
       case 'changeTheme':
@@ -49,14 +49,15 @@ const Blogs = () => {
       default:
     }
   }
+
   const checkFilter = (item) => {
-    console.log(searchFilter, item.title, item.tags, tagsFilter);
     return (tagsFilter.length === 0 || tagsFilter
       .map(x => x.toLowerCase())
       .some(x => item.tags.includes(x.toLowerCase()))) && (
         item.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
         item.content.toLowerCase().includes(searchFilter.toLowerCase()));
   }
+
   useEffect(() => {
     globalInitialiserCallbacks.BlogsCallBack = (data) => {
       if (data.blogs) {
@@ -66,41 +67,40 @@ const Blogs = () => {
         setTags(data.tags);
       }
     }
-  });
+  }, []); // Added dependency array to fix "useEffect defined but never used" or infinite loop issues
+
   return (
     <div className={[styles.Blogs, styles[theme]].join(" ")}>
       <Search onTextUpdate={searchTextUpdate} tags={tags} buttonClick={buttonClick} theme={theme} />
       <div className={styles.content}>
         <div className={styles.blogWrapper}>
-          {blogs && blogs.map((item, i) => {
-            if (checkFilter(item)) {
-              return (
-                <div className={styles.verticalItem} key={i}>
-                  <div className={styles.item}>
-                    <img src={item.image} alt={item.title} />
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.content}</p>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', margin: '0 auto' }}>
-                    {item.blog && item.blog.length > 0 &&
-                      <button onClick={() => window.open(item.blog, "_blank")}>
-                        Read Blog
-                      </button>
-                    }
-
-                    {item.download && item.download.length > 0 &&
-                      <button onClick={() => window.open(item.download, "_blank")}>
-                        Checkout App
-                      </button>
-                    }
+          {blogs && blogs
+            .filter(item => checkFilter(item)) // Step 1: Filter the items first
+            .map((item, i) => (                // Step 2: Map only the items that passed the filter
+              <div className={styles.verticalItem} key={i}>
+                <div className={styles.item}>
+                  <img src={item.image} alt={item.title} />
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.content}</p>
                   </div>
                 </div>
-              )
-            };
+                <div style={{ display: 'flex', margin: '0 auto' }}>
+                  {item.blog && item.blog.length > 0 &&
+                    <button onClick={() => window.open(item.blog, "_blank")}>
+                      Read Blog
+                    </button>
+                  }
+
+                  {item.download && item.download.length > 0 &&
+                    <button onClick={() => window.open(item.download, "_blank")}>
+                      Checkout App
+                    </button>
+                  }
+                </div>
+              </div>
+            ))
           }
-          )}
         </div>
       </div>
     </div>

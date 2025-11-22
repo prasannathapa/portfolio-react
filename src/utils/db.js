@@ -5,6 +5,7 @@ const Bengali = require('../lang/Bengali.json');
 const Hindi = require('../lang/Hindi.json');
 const Tamil = require('../lang/Tamil.json');
 const Telugu = require('../lang/Telugu.json');
+const Nepali = require('../lang/Nepali.json');
 
 const loadingSvg = <div className={styles.loading} title="Loading"><svg version="1.1" id="loading-dots" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" space="preserve"><path d="M60.952,195.048C27.343,195.048,0,222.391,0,256s27.343,60.952,60.952,60.952 s60.952-27.343,60.952-60.952S94.562,195.048,60.952,195.048z">
     <animate
@@ -49,6 +50,8 @@ const t = (lang, msg) => {
                 return Tamil[msg] || fallBack[msg] || msg;
             case 'Telugu':
                 return Telugu[msg] || fallBack[msg] || msg;
+            case 'Nepali':
+                return Nepali[msg] || fallBack[msg] || msg;
             default:
                 return English[msg] || msg;
         }
